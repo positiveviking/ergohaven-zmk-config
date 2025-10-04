@@ -22,6 +22,22 @@
             tapping-term-ms = <200>;
             hold-trigger-key-positions = <36>;
         };
+
+        hyphen: hyphen {
+            compatible = "zmk,behavior-tap-dance";
+            label = "HYPHEN";
+            #binding-cells = <0>;
+            bindings = <&kp SQT>, <&kp MINUS>;
+        };
+    };
+
+    macros {
+        console: console {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(LC(GRAVE))>;
+            label = "CONSOLE";
+        };
     };
 
     keymap {
@@ -31,7 +47,7 @@
             bindings = <
 &kp GRAVE             &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
 &kp ESC               &kp Q   &kp W     &kp E     &kp R      &kp T                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
-&kp TAB               &kp A   &kp S     &kp D     &kp F      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp TAB               &kp A   &kp S     &kp D     &kp F      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &hyphen
 &caps LSHFT CAPSLOCK  &kp Z   &kp X     &kp C     &kp V      &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
                               &kp LGUI  &kp LALT  &kp LCTRL  &mo 1   &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT   &kp RGUI
             >;
@@ -48,11 +64,11 @@
 
         nav {
             bindings = <
-&kp F1  &kp F2  &kp F3        &kp F4    &kp F5         &kp F6                     &kp F7           &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
-&trans  &trans  &kp HOME      &kp UP    &kp END        &kp INS                    &kp PG_UP        &kp N7  &kp N8  &kp N9   &trans   &trans
-&trans  &trans  &kp LEFT      &kp DOWN  &kp RIGHT      &kp RET                    &kp PG_DN        &kp N4  &kp N5  &kp N6   &trans   &trans
-&trans  &trans  &kp LC(LEFT)  &kp CAPS  &kp LC(RIGHT)  &kp DEL  &trans    &trans  &kp PRINTSCREEN  &kp N1  &kp N2  &kp N3   &trans   &trans
-                &trans        &trans    &trans         &trans   &trans    &trans  &mo 3            &trans  &kp N0  &trans
+&kp F1    &kp F2  &kp F3        &kp F4    &kp F5         &kp F6                     &kp F7           &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
+&console  &none   &kp HOME      &kp UP    &kp END        &kp INS                    &kp PG_UP        &kp N7  &kp N8  &kp N9   &none    &none
+&none     &none   &kp LEFT      &kp DOWN  &kp RIGHT      &kp RET                    &kp PG_DN        &kp N4  &kp N5  &kp N6   &none    &kp MINUS
+&trans    &none   &kp LC(LEFT)  &kp CAPS  &kp LC(RIGHT)  &kp DEL  &trans    &trans  &kp PRINTSCREEN  &kp N1  &kp N2  &kp N3   &none    &none
+                  &trans        &trans    &trans         &trans   &trans    &trans  &mo 3            &trans  &kp N0  &trans
             >;
 
             display-name = "Navigation";
@@ -60,10 +76,10 @@
 
         sym {
             bindings = <
-&trans  &trans    &kp AT    &kp DLLR   &kp HASH  &trans                       &trans     &trans    &kp CARET  &trans    &trans    &trans
-&trans  &trans    &kp LT    &kp EQUAL  &kp GT    &kp GRAVE                    &trans     &kp LBKT  &kp UNDER  &kp RBKT  &trans    &trans
-&trans  &kp BSLH  &kp LPAR  &kp MINUS  &kp RPAR  &kp PLUS                     &kp PRCNT  &kp LBRC  &kp SEMI   &kp RBRC  &kp EXCL  &trans
-&trans  &trans    &kp STAR  &kp COLON  &kp FSLH  &trans     &trans    &trans  &trans     &kp PIPE  &kp TILDE  &kp AMPS  &trans    &trans
+&none   &none     &kp AT    &kp DLLR   &kp HASH  &none                        &none      &none     &kp CARET  &none     &none     &none
+&none   &none     &kp LT    &kp EQUAL  &kp GT    &kp GRAVE                    &none      &kp LBKT  &kp UNDER  &kp RBKT  &none     &none
+&none   &kp BSLH  &kp LPAR  &kp MINUS  &kp RPAR  &kp PLUS                     &kp PRCNT  &kp LBRC  &kp SEMI   &kp RBRC  &kp EXCL  &kp MINUS
+&trans  &none     &kp STAR  &kp COLON  &kp FSLH  &none      &trans    &trans  &none      &kp PIPE  &kp TILDE  &kp AMPS  &none     &none
                   &trans    &trans     &trans    &mo 3      &trans    &trans  &trans     &trans    &trans     &trans
             >;
 
